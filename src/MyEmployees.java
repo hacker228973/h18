@@ -22,10 +22,7 @@ public class MyEmployees {
                 break;
             }
         }
-//        myCompany.add(new Employee("Никита", "Серик", 92, "Директор1"));
-//        myCompany.add(new Employee("Никита", "Серик", 100, "Директор"));
-//        myCompany.add(new Employee("Никита", "Серик", 1, "Директор"));
-//        myCompany.add(new Employee("Никита", "Серик", 92, "Директор2"));
+
         for (Employee e : myCompany) {
             System.out.println(e);
         }
@@ -52,15 +49,8 @@ class EmployeeComparator implements Comparator<Employee> {
     }
 
 }
-//class EmployeeComparator implements Comparator{
-//
-//    public int compare(Object o1, Object o2) {
-//
-//        Employee e1=(Employee) o1;
-//        Employee e2=(Employee) o2;
-//        return e1.getSalary()-e2.getSalary();
-//    }
-//}
+
+
 class Employee {
 
     private final String name;
