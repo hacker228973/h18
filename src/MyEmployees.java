@@ -1,56 +1,74 @@
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.TreeSet;
 
 public class MyEmployees {
     public static void main(String[] args) {
-        boolean lever=true;
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Сколько вам нужно добавить сотрудников?");
-        int howMany = scanner.nextInt();
 
-        TreeSet<Empl> myCompany = new TreeSet<Empl>(new Employees());
-        for(int i = 1 ;i<=howMany;i++){
-            myCompany.add(Empl.addEmployee(scanner));
 
+        TreeSet<Employee> myCompany = new TreeSet<Employee>(new EmployeeComparator());
+        System.out.println("Если хотите добавить сотрудника впишите add, если выйти то напишите exit");
+
+        while (true) {
+            String choice = scanner.nextLine();
+            if (Objects.equals(choice, "add")) {
+                myCompany.add(Employee.addEmployee(scanner));
+            }
+            if (Objects.equals(choice, "exit")) {
+                break;
+            }
         }
-        for (Empl e : myCompany) {
+//        myCompany.add(new Employee("Никита", "Серик", 92, "Директор1"));
+//        myCompany.add(new Employee("Никита", "Серик", 100, "Директор"));
+//        myCompany.add(new Employee("Никита", "Серик", 1, "Директор"));
+//        myCompany.add(new Employee("Никита", "Серик", 92, "Директор2"));
+        for (Employee e : myCompany) {
             System.out.println(e);
         }
 
     }
 
 
-
-//    public static void print(TreeSet<Empl> myCompany) {
-//        for (Empl e : myCompany) {
-//            System.out.println(e);
-//        }
-//    }
-
 }
 
-class Employees implements Comparator<Empl> {
+class EmployeeComparator implements Comparator<Employee> {
 
     @Override
-    public int compare(Empl e1, Empl e2) {
+    public int compare(Employee e1, Employee e2) {
         if (e1.getSalary() > e2.getSalary()) {
-            return -1;
-        } else {
-            return  1;
+            return -2;
+
         }
+        if (e1.getSalary() < e2.getSalary()) {
+            return 2;
+        } else {
+            return 1;
+        }
+
     }
+
 }
+//class EmployeeComparator implements Comparator{
+//
+//    public int compare(Object o1, Object o2) {
+//
+//        Employee e1=(Employee) o1;
+//        Employee e2=(Employee) o2;
+//        return e1.getSalary()-e2.getSalary();
+//    }
+//}
+class Employee {
 
-class Empl {
+    private final String name;
+    private final String surname;
+    private final int salary;
+    private final String employeeType;
 
-    private String name;
-    private String surname;
-    private int salary;
-    private String employeeType;
-
-    public static Empl addEmployee(Scanner scanner) {
-        scanner.nextLine();
+    public static Employee addEmployee(Scanner scanner) {
         System.out.println("Введите имя");
         String name = scanner.nextLine();
         System.out.println("Введите фамилию");
@@ -62,10 +80,10 @@ class Empl {
 
 
         System.out.println("Добавлено");
-        return new Empl(name, surname, salary, employeeType);
+        return new Employee(name, surname, salary, employeeType);
     }
 
-    public Empl(String name, String surname, int salary, String employeeType) {
+    public Employee(String name, String surname, int salary, String employeeType) {
         this.name = name;
         this.surname = surname;
         this.salary = salary;
